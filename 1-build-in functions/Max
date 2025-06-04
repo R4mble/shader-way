@@ -1,0 +1,11 @@
+uniform vec2 iResolution;
+
+// 用max可以, 没有重合的情况下直接加起来也ok
+void main() {
+  // Normalized pixel coordinates (from 0 to 1)
+  vec2 uv = gl_FragCoord.xy / iResolution.xy;
+
+  vec3 color = vec3(1.0, 0.3, 0.3);
+
+  gl_FragColor = vec4(color * (step(uv.x, 0.25) + step(0.75, uv.x)), 1.0);
+}

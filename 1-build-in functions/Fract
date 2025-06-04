@@ -1,0 +1,10 @@
+uniform vec2 iResolution;
+
+// uv.x本来是在[0,1], 乘10之后是[0,10], fract之后又是0到1, 那么再以0.5为edge拆分画图
+// 有一点难理解: 思维要灵活地从整体到单个来回切换
+void main() {
+  // Normalized pixel coordinates (from 0 to 1)
+  vec2 uv = gl_FragCoord.xy / iResolution.xy;
+  float t = fract(uv.x * 10.0);
+  gl_FragColor = vec4(step(0.5, t), 0.0, 0.0, 1.0);
+}

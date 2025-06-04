@@ -1,0 +1,12 @@
+// 不是归一化, 而是拆分成cell
+// cell的xy如果在margin以下则为0,否则为1
+void main() {
+  float cellSize = 50.0;
+  float margin = 10.0;
+  vec2 cell = gl_FragCoord.xy / (cellSize + margin);
+  
+  float t = step(margin / (cellSize + margin), fract(cell.x));
+  t *= step(margin / (cellSize + margin), fract(cell.y));
+  
+  gl_FragColor = vec4(t, 0.0, 0.0, 1.0);
+}

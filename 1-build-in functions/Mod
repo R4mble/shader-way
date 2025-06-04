@@ -1,0 +1,16 @@
+uniform vec2 iResolution;
+
+// 1. 怎么隐藏第三个红色: 使用乘法, 是第三个则mod(uv.x + 1.0, 3.0)在[0,1]之间,对1step之后就是0,就会抹掉. 如果不是第三个,则在[1,3]之间,对1step之后就是1,就无影响
+// 2. 怎么找到第三个红色: 对uv操作, [0,3]之间对3取余,都是其本身没意义,所以+1之后取余,能把第三个区分出来
+void main() {
+  // Normalized pixel coordinates (from 0 to 1)
+  vec2 uv = gl_FragCoord.xy / iResolution.xy;
+  
+  uv *= 9.0;
+  float x = fract(uv.x);
+
+  x = step(0.5, x);
+  x *= step(1.0, mod(uv.x + 1.0, 3.0));
+
+  gl_FragColor = vec4(x, 0.0, 0.0, 1.0);
+}

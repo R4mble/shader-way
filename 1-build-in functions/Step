@@ -1,0 +1,7 @@
+uniform vec2 iResolution;
+
+// Step就是台阶的意思, 第一个参数就是edge, 第二个参数小于它就返回0, 大于它就返回1
+void main() {
+  vec2 uv = gl_FragCoord.xy / iResolution.xy;
+  gl_FragColor = vec4(step(0.5, uv.x), 0.0, 0.0, 1.0);
+}

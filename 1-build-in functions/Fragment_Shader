@@ -1,0 +1,6 @@
+// 效果: 展示黄色
+// 使用: 放到html-shader/index.html里即可展示
+// 原理: 4维向量, 分别是rgba, 红色+绿色就是黄色
+void main() {
+  gl_FragColor = vec4(1.0, 1.0, 0.0, 1.0);
+}

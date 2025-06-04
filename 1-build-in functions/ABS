@@ -1,0 +1,9 @@
+uniform vec2 iResolution;
+
+// 前面用过的技法
+void main() {
+  // Normalized pixel coordinates (from 0 to 1)
+  vec2 uv = gl_FragCoord.xy / iResolution.xy;
+  uv = uv * 2.0 - 1.0;
+  gl_FragColor = vec4(abs(uv.x), 0.0, 0.0, 1.0);
+}

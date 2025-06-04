@@ -1,0 +1,17 @@
+uniform vec2 iResolution;
+
+float max4(float a, float b, float c, float d) {
+  return max(a, max(b, max(c, d)));
+}
+
+// x小于50像素的 || x大于1-50像素的 || y小于50像素的 || y大于1-50像素的
+// 就是四周涂上uv色
+// max函数好恶心, 提个函数出来得了
+void main() {
+  // Normalized pixel coordinates (from 0 to 1)
+  vec2 uv = gl_FragCoord.xy / iResolution.xy;
+  float w1 = 50.0 / iResolution.x;
+  float w2 = 50.0 / iResolution.y;
+
+  gl_FragColor = vec4(uv * max4(step(uv.x, w1), step(1.0-w1, uv.x), step(uv.y, w2), step(1.0-w2, uv.y)), 0.0, 1.0);
+}

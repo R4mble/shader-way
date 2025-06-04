@@ -9,6 +9,6 @@
 一步一步来吧!
 
 参考资料:
-https://thebookofshaders.com/
+- https://thebookofshaders.com/
 
-https://shader-learning.com/
+- https://shader-learning.com/

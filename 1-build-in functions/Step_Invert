@@ -1,0 +1,10 @@
+uniform vec2 iResolution;
+
+// 更直观的是这种写法: 1.0 - step(threshold, value);
+// 但是直接颠倒也行
+void main() {
+  // Normalized pixel coordinates (from 0 to 1)
+  vec2 uv = gl_FragCoord.xy / iResolution.xy;
+
+  gl_FragColor = vec4(step(uv.x, 0.5), 0.0, 0.0, 1.0);
+}
