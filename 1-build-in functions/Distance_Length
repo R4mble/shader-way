@@ -1,0 +1,8 @@
+uniform vec2 iResolution;
+
+// 画菱形那探索了的
+void main() {
+  vec2 uv = gl_FragCoord.xy / iResolution.xy;
+  uv -= 0.5;
+  gl_FragColor = vec4(step(length(uv), 0.25), 0.0, 0.0, 1.0);
+}

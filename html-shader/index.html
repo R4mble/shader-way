@@ -13,33 +13,11 @@
 precision mediump float;
 #endif
 
-uniform vec2 u_resolution;
+uniform vec2 iResolution;
 
-float pattern(vec2 uv) {
-  uv = uv * 2.0 - 1.0;
-  float t = pow(uv.x * uv.x, 0.3) + pow(uv.y * uv.y, 0.3) - 1.0;
-  return step(0.0, t) * t * 10.0 + step(0.2, t);
-}
-
-void main() {
-  // Normalized pixel coordinates (from 0 to 1)
-  vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-
-//   gl_FragColor = vec4(pattern(fract(uv * vec2(5.0, 3.0))), 0.0, 0.0, 1.0);
-//   gl_FragColor = vec4(fract(step(0.5, uv.x) * vec2(5.0, 3.0)),  0.0, 1.0);
-//   gl_FragColor = vec4(fract(uv * vec2(5.0, 3.0)),  0.0, 1.0);
-
-    vec2 grid = vec2(5.0, 3.0);
-    vec2 cell = floor(uv * grid);   // 取得格子编号
-
-    // 简单用格子坐标做颜色，x坐标影响红，y坐标影响绿
-    float r = mod(cell.x, 2.0);     // x 奇偶决定红色强弱
-    float g = mod(cell.y, 2.0);     // y 奇偶决定绿色强弱
-
-    gl_FragColor = vec4(r, g, 0.0, 1.0);
-
-}
-
+  uv -= 0.5;
+  uv.x *= iResolution.x / iResolution.y;
+  gl_FragColor = vec4(step(length(uv), 0.25), 0.0, 0.0, 1.0);
 
 
 
